@@ -1,10 +1,8 @@
-import pygame
-import Client
-import SocketServer
+import socketserver
 
 print (__name__)
 
-class Server(SocketServer.BaseRequestHandler):
+class Server(socketserver.BaseRequestHandler):
     
     def handle(self):
         # self.request is the TCP socket connected to the client
@@ -13,15 +11,15 @@ class Server(SocketServer.BaseRequestHandler):
         #print self.data
         # just send back the same data, but upper-cased
         self.request.sendall(self.data.upper())
-        
-    def __init__(self, socket):
-        HOST, PORT = "localhost", socket
-        self.server = SocketServer.TCPServer((HOST, PORT), Server)
-        self.server.serve_forever()
-        self.server.shutdown()
-    
-    def StopGame(self):
-        self.shutdown()
-    
-        
-        
+
+server = None
+
+def startserver(port):
+    global server
+    HOST, PORT = "localhost", port
+    server = socketserver.TCPServer((HOST, PORT), Server)
+    server.serve_forever()
+
+def stopserver():
+    global server
+    server.shutdown()

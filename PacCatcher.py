@@ -1,19 +1,22 @@
 import pygame
 import Server
-import SocketServer
 import threading
 # from pygame.locals import *
 
 class PacCatcher():
     
-    
     def __init__(self):
         pygame.init()
         self.fpsClock = pygame.time.Clock()
-        self.screen = pygame.display.set_mode((1366,768), pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((400,400))
         self.quit = False
-        self.serverthread = threading.Thread(target=Server.Server, args=(2345))
-        #self.serverthread.start()
+        self.isserver = False
+        self.isclient = False
+        if self.isserver:
+            self.server = threading.Thread(target=Server.startserver, args=(1234,))
+            self.server.start()
+        elif self.isclient:
+            pass
         self.mainloop()
         
         
@@ -22,11 +25,12 @@ class PacCatcher():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.exitgame()
-                    Server.Server.StopGame()
+                    Server.stopserver()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.exitgame()
-                        Server.Server.StopGame()
+                        Server.stopserver()
+                        
             self.screen.fill((255,255,255))
             pygame.display.update()
             self.fpsClock.tick(30)
