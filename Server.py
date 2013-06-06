@@ -1,17 +1,9 @@
-'''
-Created on 4 jun. 2013
+import pygame
+import Client
 
-@author: Administrator
-'''
-
-class MyClass(object):
-    '''
-    classdocs
-    '''
-
-
-    def __init__(selfparams):
-        '''
-        Constructor
-        '''
+class Server(Client):
+    pygame.init()
+    
+    def __init__(self):
+        
         

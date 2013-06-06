@@ -1,8 +1,8 @@
 import pygame
-from pygame import *
 
-class MyClass(object):        
+class Client(object):        
+    pygame.init()
     def ConnectToServer(self, serverIp):
-        print('hoi')
+        pass
     def __init__(self, serverip):
-        #ConnectToServer(self, serverip)    
+        self.ConnectToServer(self, serverip)    
