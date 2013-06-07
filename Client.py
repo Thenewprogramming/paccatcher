@@ -22,5 +22,5 @@ def SendMessage(message):
 
 if __name__ == "__main__":
     # a little debugging
-    SetAdress("localhost", 1234)
+    SetAdress("localhost", 1111)
     print(SendMessage("herpaderp"))
