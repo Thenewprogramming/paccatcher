@@ -1,29 +1,23 @@
 import socketserver
 
-print (__name__)
-
 class Server(socketserver.BaseRequestHandler):
     
     def handle(self):
-        # self.request is the TCP socket connected to the client
         self.data = self.request.recv(4096)
-        print(self.data)
-        #print "{} wrote:".format(self.client_address[0])
-        #print self.data
-        # just send back the same data, but upper-cased
-        self.request.sendall(self.data.upper())
-        
-        print (self.data.decode("utf-8"))
+        print(self.data.decode())
+        self.request.sendto(self.data.upper(), self.client_address)
 
-server = None
-
-def startserver():
-    
+def startserver(port):
     global server
-    HOST, PORT = "", 2345
+    HOST, PORT = "", port
     server = socketserver.TCPServer((HOST, PORT), Server)
+    print("Starting server on port " + str(PORT))
     server.serve_forever()
 
 def stopserver():
     global server
     server.shutdown()
+
+if __name__ == "__main__":
+    # a little debugging
+    startserver(1234)
