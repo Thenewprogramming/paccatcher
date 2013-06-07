@@ -5,7 +5,7 @@ class Server(socketserver.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(4096)
         print(self.data.decode())
-        self.request.sendto(self.data.upper(), self.client_address)
+        self.request.sendto(self.data.upper(), self.client_address[0])
 
 def startserver(port):
     global server

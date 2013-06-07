@@ -1,22 +1,26 @@
 import socket
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-def ConnectToServer(serverIp, port):
-    global HOST, PORT, sock
-    HOST = serverIp
-    PORT = port
+def ConnectToServer():
+    global sock
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOST, PORT))
     
 def CloseConnection():
     sock.close()
 
-def SendMessage(message):
+def SetAdress(host, port):
     global HOST, PORT
+    HOST = host
+    PORT = port
+
+def SendMessage(message):
+    ConnectToServer()
     sock.sendto(message.encode(), (HOST,PORT))
-    print(sock.recv(1024).decode())
+    response = sock.recv(1024).decode()
+    CloseConnection()
+    return response
 
 if __name__ == "__main__":
     # a little debugging
-    ConnectToServer("localhost", 1234)
-    SendMessage("herpaderp")
-    CloseConnection()
+    SetAdress("localhost", 1234)
+    print(SendMessage("herpaderp"))
