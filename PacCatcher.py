@@ -13,7 +13,7 @@ class PacCatcher():
         self.quit = False
         self.returnmsg = ""
         self.mainloop()
-        return self.returnmsg
+#         return self.returnmsg
         
     def mainloop(self):
         while not self.quit:
@@ -23,16 +23,23 @@ class PacCatcher():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.exitgame()
-                    if event.key == pygame.K_G:
+                    if event.key == pygame.K_g:
                         self.returnmsg = "game"
                         self.exitgame() 
+                    if event.key == pygame.K_s:
+                        self.startgame(False, None)
+                    if event.key == pygame.K_c:
+                        self.startgame(True, "localhost")
             self.screen.fill((255,255,255))
             pygame.display.update()
             self.clock.tick(30)
             
     def exitgame(self):
         self.quit = True
-
+    def startgame(self, isclient, serverip):
+        Game.Game(isclient, serverip, self.screen, self.clock)
+    
+    
 if __name__ == "__main__":
     quit = False
     returnmsg = "main"

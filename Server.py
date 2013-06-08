@@ -1,11 +1,15 @@
 import socketserver
 
+
+
 class Server(socketserver.BaseRequestHandler):
     
     def handle(self):
         self.data = self.request.recv(4096)
         print(self.data.decode())
         self.request.sendto(self.data.upper(), self.client_address)
+
+
 
 def startserver(port):
     global server
@@ -15,7 +19,6 @@ def startserver(port):
     server.serve_forever()
 
 def stopserver():
-    global server
     server.shutdown()
 
 if __name__ == "__main__":
