@@ -10,6 +10,7 @@ class PacCatcher():
     def __init__(self, screen, clock):
         self.clock = clock
         self.screen = screen
+        pygame.display.set_caption("PacCathcer")
         self.quit = False
         self.returnmsg = ""
         self.mainloop()

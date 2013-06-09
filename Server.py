@@ -6,7 +6,9 @@ class Server(socketserver.BaseRequestHandler):
     
     def handle(self):
         self.data = self.request.recv(4096)
-        print(self.data.decode())
+        print("Client sended" + self.data.decode() + ". Now figuring out what to do with it...")
+        if (self.data.decode == "playerpositionsplease"):
+            pass
         self.request.sendto(self.data.upper(), self.client_address)
 
 
