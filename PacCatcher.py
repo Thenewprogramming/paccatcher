@@ -12,9 +12,8 @@ class PacCatcher():
         self.screen = screen
         pygame.display.set_caption("PacCathcer")
         self.quit = False
-        self.returnmsg = ""
         self.mainloop()
-#         return self.returnmsg
+        
         
     def mainloop(self):
         while not self.quit:

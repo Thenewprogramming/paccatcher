@@ -10,14 +10,13 @@ class Game():
     def __init__(self, isclient, serverip, screen, clock):
         self.isclient = isclient
         self.screen = screen
-        
         self.clock = clock
         self.quit = False
         self.returnmsg = ""
         if isclient:
             Client.SetAdress(serverip, 1234)
         elif not isclient:
-            self.serverthread = threading.Thread(target=Server.startserver(1234))
+            self.serverthread = threading.Thread(target=Server.startserver, args=(1234,))
             self.serverthread.start()
         self.mainloop()
         
