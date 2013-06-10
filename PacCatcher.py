@@ -46,10 +46,4 @@ if __name__ == "__main__":
     pygame.init()
     screen = pygame.display.set_mode((400,400))
     clock = pygame.time.Clock()
-    while not quit:
-        if returnmsg == "main":
-            returnmsg = PacCatcher(screen, clock)
-        elif returnmsg == "game":
-            returnmsg = Game.Game(True, screen, clock)
-        else:
-            quit = True
+    PacCatcher(screen, clock)

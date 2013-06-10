@@ -25,6 +25,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.returntomenu()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.returntomenu()
             self.screen.fill((0,0,0))
             
             self.ghost1 = Ghost.Ghost("red", 0, "ghost 1", 1)
@@ -35,7 +38,6 @@ class Game():
             
     def returntomenu(self):
         self.quit = True
-        self.returnmsg = "main"
         if self.isclient:
             pass
         elif not self.isclient:
