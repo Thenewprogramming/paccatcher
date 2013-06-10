@@ -4,13 +4,20 @@ import Game
 
 
 class PacCatcher():
+    """
+    This is the mainmenu class of the game.
+    """
 
     def __init__(self, screen, clock):
         self.clock = clock
         self.screen = screen
         pygame.display.set_caption("PacCathcer")
+        self.returnstr = ""
         self.quit = False
         self.mainloop()
+
+    def __str__(self):
+        return self.returnstr
 
     def mainloop(self):
         while not self.quit:

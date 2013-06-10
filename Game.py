@@ -49,7 +49,10 @@ class Game():
         ghost3 = None
         ghost4 = None
         pacman = None
-
+        
+        if (self.isclient):
+            pass
+        
         return (ghost1, ghost2, ghost3, ghost4, pacman)
 
 if __name__ == "__main__":
