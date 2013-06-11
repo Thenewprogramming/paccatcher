@@ -1,5 +1,6 @@
 import socketserver
 
+server = None
 
 class Server(socketserver.BaseRequestHandler):
 
@@ -12,14 +13,15 @@ class Server(socketserver.BaseRequestHandler):
 
 
 def startserver(port):
-    global server
+    
     HOST, PORT = "", port
     server = socketserver.TCPServer((HOST, PORT), Server)
     print("Starting server on port " + str(PORT))
     server.serve_forever()
-
+    
 
 def stopserver():
+    
     server.shutdown()
 
 if __name__ == "__main__":

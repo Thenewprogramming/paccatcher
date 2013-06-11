@@ -19,6 +19,7 @@ class Game():
         elif not isclient:
             self.serverthread = threading.Thread(target=Server.startserver, args=(1234,))
             self.serverthread.start()
+            
         self.mainloop()
 
     def mainloop(self):
