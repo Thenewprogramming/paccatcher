@@ -6,7 +6,8 @@ import threading
 
 
 class Game():
-
+    ghost1 = Ghost.Ghost("red", 0, "ghost 1", 1)
+    
     def __init__(self, isclient, serverip, screen, clock):
         self.isclient = isclient
         self.screen = screen
@@ -29,10 +30,9 @@ class Game():
                     if event.key == pygame.K_ESCAPE:
                         self.returntomenu()
             self.screen.fill((0, 0, 0))
-
-            self.ghost1 = Ghost.Ghost("red", 0, "ghost 1", 1)
+            
             self.ghost1.update()
-
+            
             pygame.display.update()
             self.clock.tick(30)
 
