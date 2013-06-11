@@ -24,6 +24,9 @@ def SendMessage(message):
     CloseConnection()
     return response
 
+def SendInfo(key):
+    return SendMessage(str(key)).split(":")
+
 if __name__ == "__main__":
     # a little debugging
     SetAdress("localhost", 1111)

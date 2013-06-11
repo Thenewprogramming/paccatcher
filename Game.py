@@ -14,6 +14,7 @@ class Game():
         self.clock = clock
         self.quit = False
         self.server = Server.Server()
+        self.keys = [pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_DOWN]
         
         if isclient:
             Client.SetAdress(serverip, 1234)
@@ -31,6 +32,8 @@ class Game():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.returntomenu()
+                    if event.key in self.keys:
+                        Client.SendInfo(event.key)
             self.screen.fill((0, 0, 0))
             
             self.ghost1.update()
