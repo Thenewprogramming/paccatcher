@@ -26,7 +26,7 @@ class PacCatcher():
                     if event.key == pygame.K_g:
                         self.exitgame()
                     if event.key == pygame.K_s:
-                        self.startgame(False, None)
+                        self.startgame(False, "localhost")
                     if event.key == pygame.K_c:
                         self.startgame(True, "localhost")
             self.screen.fill((255, 255, 255))

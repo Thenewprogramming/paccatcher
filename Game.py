@@ -16,9 +16,9 @@ class Game():
         self.server = Server.Server()
         self.keys = [pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_DOWN]
         
-        if isclient:
-            Client.SetAdress(serverip, 1234)
-        elif not isclient:
+        
+        Client.SetAdress(serverip, 1234)
+        if not isclient:
             self.serverthread = threading.Thread(target=self.server.startserver, args=(1234,))
             self.serverthread.start()
             

@@ -20,7 +20,7 @@ class Server(socketserver.BaseRequestHandler):
     def startserver(self, port):
         
         HOST, PORT = "", port
-        self.server = socketserver.TCPServer(("", 1234), self)
+        self.server = socketserver.TCPServer(("", 1234), Server)
         print("Starting server on port " + str(PORT))
         self.server.serve_forever()
         
