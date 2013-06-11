@@ -13,11 +13,12 @@ class Game():
         self.screen = screen
         self.clock = clock
         self.quit = False
+        self.server = Server.Server()
         
         if isclient:
             Client.SetAdress(serverip, 1234)
         elif not isclient:
-            self.serverthread = threading.Thread(target=Server.startserver, args=(1234,))
+            self.serverthread = threading.Thread(target=self.server.startserver, args=(1234,))
             self.serverthread.start()
             
         self.mainloop()
@@ -42,7 +43,7 @@ class Game():
         if self.isclient:
             pass
         elif not self.isclient:
-            Server.stopserver()
+            self.server.stopserver()
 
     def getplayerpositions(self):
         ghost1 = None

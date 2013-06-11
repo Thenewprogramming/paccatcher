@@ -1,9 +1,14 @@
 import socketserver
 
-server = None
 
 class Server(socketserver.BaseRequestHandler):
+    
+    server = None
 
+    def __init__(self):
+#         self.server = None
+        pass
+    
     def handle(self):
         self.data = self.request.recv(4096)
         print("Client sended" + self.data.decode() + ". Now figuring out what to do with it...")
@@ -12,18 +17,18 @@ class Server(socketserver.BaseRequestHandler):
         self.request.sendto(self.data.upper(), self.client_address)
 
 
-def startserver(port):
+    def startserver(self, port):
+        
+        HOST, PORT = "", port
+        self.server = socketserver.TCPServer(("", 1234), self)
+        print("Starting server on port " + str(PORT))
+        self.server.serve_forever()
+        
     
-    HOST, PORT = "", port
-    server = socketserver.TCPServer((HOST, PORT), Server)
-    print("Starting server on port " + str(PORT))
-    server.serve_forever()
+    def stopserver(self):
+        
+        self.server.shutdown()
     
-
-def stopserver():
-    
-    server.shutdown()
-
 if __name__ == "__main__":
-    # a little debugging
-    startserver(1111)
+#     a little debugging
+    Server.startserver(1111)
