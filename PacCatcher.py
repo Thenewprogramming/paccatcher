@@ -12,12 +12,8 @@ class PacCatcher():
         self.clock = clock
         self.screen = screen
         pygame.display.set_caption("PacCathcer")
-        self.returnstr = ""
         self.quit = False
         self.mainloop()
-
-    def __str__(self):
-        return self.returnstr
 
     def mainloop(self):
         while not self.quit:
@@ -28,7 +24,6 @@ class PacCatcher():
                     if event.key == pygame.K_ESCAPE:
                         self.exitgame()
                     if event.key == pygame.K_g:
-                        self.returnmsg = "game"
                         self.exitgame()
                     if event.key == pygame.K_s:
                         self.startgame(False, None)
@@ -45,8 +40,6 @@ class PacCatcher():
         Game.Game(isclient, serverip, self.screen, self.clock)
 
 if __name__ == "__main__":
-    quitapp = False
-    returnmsg = "main"
     pygame.init()
     screen = pygame.display.set_mode((400, 400))
     clock = pygame.time.Clock()

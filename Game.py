@@ -12,7 +12,7 @@ class Game():
         self.screen = screen
         self.clock = clock
         self.quit = False
-        self.returnmsg = ""
+        
         if isclient:
             Client.SetAdress(serverip, 1234)
         elif not isclient:
