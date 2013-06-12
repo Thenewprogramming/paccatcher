@@ -36,7 +36,8 @@ class Game():
                         Client.SendInfo(event.key)
             self.screen.fill((0, 0, 0))
             
-            self.ghost1.update()
+            self.ghost1.update((200,200))
+            
             
             pygame.display.update()
             self.clock.tick(30)

@@ -15,6 +15,7 @@ class Ghost(pygame.sprite.Sprite):
         self.color = color
         self.score = score
         self.name = name
+        self.pos = (200,200)
         if not speed == None:
             self.speed = speed
         
@@ -25,7 +26,8 @@ class Ghost(pygame.sprite.Sprite):
     def setcolor(self, color):
         self.color = color
 
-    def update(self):
+    def update(self, pos):
+        self.pos = pos
         if (self.whichimage == 2):
             self.image = pygame.image.load(os.path.join("img", 'pcman1.png'))
         if (self.whichimage == 4):
@@ -35,11 +37,20 @@ class Ghost(pygame.sprite.Sprite):
         if (self.whichimage == 8):
             self.image = pygame.image.load(os.path.join("img", 'pcman4.png'))
         if (self.whichimage == 10):
-            self.image = pygame.image.load(os.path.join("img", 'pcman5.png'))
+            self.image = pygame.image.load(os.path.join("img", 'pcman4.png'))
+        if (self.whichimage == 12):
+            self.image = pygame.image.load(os.path.join("img", 'pcman4.png'))
+        if (self.whichimage == 14):
+            self.image = pygame.image.load(os.path.join("img", 'pcman3.png'))
+        if (self.whichimage == 16):
+            self.image = pygame.image.load(os.path.join("img", 'pcman2.png'))
+        if (self.whichimage == 18):
+            self.image = pygame.image.load(os.path.join("img", 'pcman1.png'))
+        if (self.whichimage == 20):
+            self.image = pygame.image.load(os.path.join("img", 'pcman1.png'))
+        pygame.display.get_surface().blit(self.image, self.pos, area=None, special_flags = 0)
         
-        pygame.display.get_surface().blit(self.image, (200,200), area=None, special_flags = 0)
-        
-        if (self.whichimage < 10):
+        if (self.whichimage < 20):
             self.whichimage += 1
         else:
             self.whichimage = 1
