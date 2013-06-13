@@ -14,7 +14,6 @@ def CloseConnection():
     sock.close()
 
 def SendMessage(message):
-    
     ConnectToServer()
     sock.sendto(message.encode(), (HOST, PORT))
     response = sock.recv(1024).decode()
@@ -23,7 +22,9 @@ def SendMessage(message):
 
 def SendInfo(key):
     #I removed the split thing because the message is never gonna be an array... (just look at the game loop key handler)
-    return SendMessage(str(key))
+    data = SendMessage(str(key)).split(":")
+    
+    return data
 
 if __name__ == "__main__":
     # a little debugging

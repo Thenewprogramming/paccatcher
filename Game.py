@@ -7,8 +7,7 @@ import threading
 
 class Game():
     ghost1 = Ghost.Ghost("red", 0, "ghost 1", 1)
-    ghost1posx = 200
-    ghost1posy = 200
+    ghost1pos = (200,200)
     
     def __init__(self, isclient, serverip, screen, clock):
         self.isclient = isclient
@@ -17,11 +16,12 @@ class Game():
         self.quit = False
         self.server = Server.Server()
         self.keys = [pygame.K_RIGHT, pygame.K_LEFT, pygame.K_UP, pygame.K_DOWN]
-        
-        
+        self.ghosts = [self.ghost1]
+        self.pos1 = self.ghost1.getpos()
+        print (self.pos1)
         Client.SetAdress(serverip, 1234)
         if not isclient:
-            self.serverthread = threading.Thread(target=self.server.startserver, args=(1234,))
+            self.serverthread = threading.Thread(target=self.server.startserver, args=(1234, self.ghosts))
             self.serverthread.start()
             
         self.mainloop()
@@ -35,10 +35,9 @@ class Game():
                     if event.key == pygame.K_ESCAPE:
                         self.returntomenu()
                     if event.key in self.keys:
-                        Client.SendInfo(event.key)
+                        self.pos1 = Client.SendInfo(event.key)
             self.screen.fill((0, 0, 0))
-            
-            self.ghost1.update((self.ghost1posx,self.ghost1posy))
+            self.ghost1.update(self.pos1)
             
             #self.ghost1posx += 1
             #self.ghost1posy += 1
