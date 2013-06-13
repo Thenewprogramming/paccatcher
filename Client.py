@@ -22,7 +22,8 @@ def SendMessage(message):
     return response
 
 def SendInfo(key):
-    return SendMessage(str(key)).split(":")
+    #I removed the split thing because the message is never gonna be an array... (just look at the game loop key handler)
+    return SendMessage(str(key))
 
 if __name__ == "__main__":
     # a little debugging

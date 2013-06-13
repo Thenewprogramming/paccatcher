@@ -7,6 +7,8 @@ import threading
 
 class Game():
     ghost1 = Ghost.Ghost("red", 0, "ghost 1", 1)
+    ghost1posx = 200
+    ghost1posy = 200
     
     def __init__(self, isclient, serverip, screen, clock):
         self.isclient = isclient
@@ -36,8 +38,10 @@ class Game():
                         Client.SendInfo(event.key)
             self.screen.fill((0, 0, 0))
             
-            self.ghost1.update((200,200))
+            self.ghost1.update((self.ghost1posx,self.ghost1posy))
             
+            #self.ghost1posx += 1
+            #self.ghost1posy += 1
             
             pygame.display.update()
             self.clock.tick(30)
@@ -60,6 +64,7 @@ class Game():
             pass
         
         return (ghost1, ghost2, ghost3, ghost4, pacman)
+
 
 if __name__ == "__main__":
     Game(True)
