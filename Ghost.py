@@ -32,7 +32,7 @@ class Ghost(pygame.sprite.Sprite):
     def update(self, pos):
         pos = (int(pos[0]), int(pos[1]))
         
-         if (self.whichimage == 2):
+        if (self.whichimage == 2):
             self.image = pygame.image.load(os.path.join("img", 'pcman1.png'))
         if (self.whichimage == 4):
             self.image = pygame.image.load(os.path.join("img", 'pcman2.png'))
