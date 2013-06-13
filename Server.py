@@ -25,9 +25,18 @@ class ServerHandler(socketserver.BaseRequestHandler):
         self.data = self.request.recv(4096)
         print("Client sent" + self.data.decode() + ". Now figuring out what to do with it..." )
         
-        if (self.data.decode() == str(pygame.K_DOWN) | self.data.decode() == str(pygame.K_UP) | self.data.decode() == str(pygame.K_LEFT) | self.data.decode() == str(pygame.K_RIGHT) ):
-            Server.processkeypress(self.data.decode())
-        
+        if (self.data.decode() == str(pygame.K_DOWN)):
+            Server.processkeypress(Server, self.data.decode())
+            
+        if (self.data.decode() == str(pygame.K_UP)):
+            Server.processkeypress(Server, self.data.decode())
+            
+        if (self.data.decode() == str(pygame.K_RIGHT)):
+            Server.processkeypress(Server, self.data.decode())
+            
+        if (self.data.decode() == str(pygame.K_LEFT)):
+            Server.processkeypress(Server, self.data.decode())
+            
         
         self.request.sendto(self.data.upper(), self.client_address)
         
