@@ -30,6 +30,7 @@ class inputbox():
         self.color_back = color_back
         self.color_text = color_text
         self.message = self.question + ": "
+        self.focus = False
         
     def update(self):
         inkey = self.get_key()
@@ -53,6 +54,15 @@ class inputbox():
             pass
         else:
             pygame.event.post(event)
+            
+    def getRect(self):
+        return pygame.Rect((self.pos[0]) - 100, (self.pos[1]) - 10, 200,20)
+    
+    def setFocus(self, focus):
+        self.focus = focus
+    
+    def getFocus(self):
+        return self.focus
     
     def draw(self):
         fontobject = pygame.font.Font(None,18)
