@@ -2,24 +2,25 @@ import pygame
 import pygame.font
 import Game
 import inputbox2
-import threading
 
 """
 This is the mainmenu class of the game.
 """
 
+
 def init(display, time):
-    global clock, screen, quit, name, ip
-    time = clock
-    display = screen
+    global clock, screen, quitgame, name, ip
+    clock = time
+    screen = display
     pygame.display.set_caption("PacCathcer")
-    quit = False
+    quitgame = False
     name = ""
     ip = ""
     mainloop()
 
+
 def mainloop():
-    global clock, screen, quit, name, ip
+    global clock, screen, quitgame, name, ip
     color_server = color_client = (255, 0, 0)
     pygame.font.init()
     name_input = None
@@ -28,77 +29,77 @@ def mainloop():
     serverBtn = pygame.Rect((50, 50), (100, 25))
     clientBtn = pygame.Rect((250, 50), (100, 25))
     startBtn = pygame.Rect((300, 320), (90, 70))
-    
-    while not quit:
-        
+
+    while not quitgame:
+
         if name_input != None:
             if name_input.getFocus():
-                name = name_input.update()
+                name, clear_name = name_input.update()
+                if clear_name:
+                    name_input = None
+                    clear_name = False
         if ip_input != None:
             if ip_input.getFocus():
-                ip = ip_input.update()
-        
+                ip, clear_ip = ip_input.update()
+                if clear_ip:
+                    ip_input = None
+                    clear_ip = False
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exitgame()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouserect = pygame.Rect(pygame.mouse.get_pos(), (1, 1))
                 if mouserect.colliderect(clientBtn):
-                    name_input = inputbox2.inputbox(screen, "Your name", [screen.get_width()/2, 100], (255, 255, 255), (0,0,0))
-                    ip_input = inputbox2.inputbox(screen, "Servers ip", [screen.get_width()/2, 200], (255, 255, 255), (0,0,0))  
-                    isclient = True  
+                    name_input = inputbox2.inputbox(screen, "Your name", [screen.get_width() / 2, 100], (255, 255, 255), (0, 0, 0))
+                    ip_input = inputbox2.inputbox(screen, "Servers ip", [screen.get_width() / 2, 200], (255, 255, 255), (0, 0, 0))
+                    isclient = True
                 elif mouserect.colliderect(serverBtn):
-                    name_input = inputbox2.inputbox(screen, "Your name", [screen.get_width()/2, 100], (255, 255, 255), (0,0,0))
+                    name_input = inputbox2.inputbox(screen, "Your name", [screen.get_width() / 2, 100], (255, 255, 255), (0, 0, 0))
                     ip_input = None
                     isclient = False
                 elif mouserect.colliderect(startBtn):
-                    startgame(isclient, ip, name)
-                elif mouserect.colliderect(name_input.getRect()):
-                    name_input.setFocus(True)
-                    if isclient:
-                        ip_input.setFocus(False)
-                elif isclient:
+                    #startgame(isclient, ip, name)
+                    print("Here we should start the game :P\nInfo: " + str(isclient) + " " + str(ip) + " " + str(name))
+                elif name_input != None:
+                    if mouserect.colliderect(name_input.getRect()):
+                        name_input.setFocus(True)
+                        if isclient and ip_input != None:
+                            ip_input.setFocus(False)
+                elif ip_input != None:
                     if mouserect.colliderect(ip_input.getRect()):
                         ip_input.setFocus(True)
-                        name_input.setFocus(False)
-                                    
+                        if name_input != None:
+                            name_input.setFocus(False)
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     exitgame()
-        
+
         screen.fill((255, 255, 255))
-        
-        fontobject = pygame.font.Font(None,30)
-        
+
+        fontobject = pygame.font.Font(None, 30)
+
         pygame.draw.rect(screen, color_client, clientBtn)
         pygame.draw.rect(screen, color_server, serverBtn)
         pygame.draw.rect(screen, (255, 0, 0), startBtn)
-        screen.blit(fontobject.render("server", True, (0,0,0)), (60, 55))
-        screen.blit(fontobject.render("client", True, (0,0,0)), (260, 55))
-        screen.blit(fontobject.render("Start", True, (0,0,0)), (322, 345))
-        
+        screen.blit(fontobject.render("server", True, (0, 0, 0)), (60, 55))
+        screen.blit(fontobject.render("client", True, (0, 0, 0)), (260, 55))
+        screen.blit(fontobject.render("Start", True, (0, 0, 0)), (322, 345))
+
         if name_input != None:
             name_input.draw()
         if ip_input != None:
             ip_input.draw()
-            
-        if name != "":
-            name_input = None
-            print(name)
-            name = ""
-            
-        if ip != "":
-            ip_input = None
-            print(ip)
-            ip = ""
-        
-        
+
         pygame.display.update()
         clock.tick(30)
 
+
 def exitgame():
-    global quit
-    quit = True
+    global quitgame
+    quitgame = True
+
 
 def startgame(isclient, serverip, name):
     Game.init(isclient, serverip, screen, clock)

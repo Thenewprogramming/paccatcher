@@ -1,3 +1,7 @@
+"""
+Needs rewriting
+"""
+
 import socketserver
 import pygame
 import Game

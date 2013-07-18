@@ -1,17 +1,25 @@
+"""
+Needs rewriting
+"""
+
 import socket
+
 
 def SetAdress(host, port):
     global HOST, PORT
     HOST = host
     PORT = port
 
+
 def ConnectToServer():
     global sock
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOST, PORT))
 
+
 def CloseConnection():
     sock.close()
+
 
 def SendMessage(message):
     ConnectToServer()
@@ -20,10 +28,10 @@ def SendMessage(message):
     CloseConnection()
     return response
 
+
 def SendInfo(key):
     #I removed the split thing because the message is never gonna be an array... (just look at the game loop key handler)
     data = SendMessage(str(key)).split(":")
-    
     return data
 
 if __name__ == "__main__":
