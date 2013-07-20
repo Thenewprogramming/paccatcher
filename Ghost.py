@@ -6,7 +6,7 @@ class Ghost(pygame.sprite.Sprite):
     color = None
     score = None
     name = None
-    speed = None  #Can be boosted when we add potion-like items that appear randomly
+    speed = None  # Can be boosted when we add potion-like items that appear randomly
     image = None
     whichimage = 1
 

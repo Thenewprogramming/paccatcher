@@ -1,5 +1,4 @@
 import pygame
-import pygame.font
 import Game
 import inputbox2
 
@@ -8,24 +7,18 @@ This is the mainmenu class of the game.
 """
 
 
-def init(display, time):
-    global clock, screen, quitgame, name, ip
-    clock = time
-    screen = display
-    pygame.display.set_caption("PacCathcer")
+def init():
+    global quitgame
+    pygame.display.set_caption("PacCatcher")
+
     quitgame = False
     name = ""
     ip = ""
-    mainloop()
-
-
-def mainloop():
-    global clock, screen, quitgame, name, ip
-    color_server = color_client = (255, 0, 0)
-    pygame.font.init()
     name_input = None
     ip_input = None
     isclient = None
+
+    color_server = color_client = (255, 0, 0)
     serverBtn = pygame.Rect((50, 50), (100, 25))
     clientBtn = pygame.Rect((250, 50), (100, 25))
     startBtn = pygame.Rect((300, 320), (90, 70))
@@ -38,6 +31,7 @@ def mainloop():
                 if clear_name:
                     name_input = None
                     clear_name = False
+
         if ip_input != None:
             if ip_input.getFocus():
                 ip, clear_ip = ip_input.update()
@@ -59,8 +53,8 @@ def mainloop():
                     ip_input = None
                     isclient = False
                 elif mouserect.colliderect(startBtn):
-                    #startgame(isclient, ip, name)
                     print("Here we should start the game :P\nInfo: " + str(isclient) + " " + str(ip) + " " + str(name))
+                    startgame(isclient, ip, name)
                 elif name_input != None:
                     if mouserect.colliderect(name_input.getRect()):
                         name_input.setFocus(True)
@@ -101,10 +95,11 @@ def exitgame():
     quitgame = True
 
 
-def startgame(isclient, serverip, name):
-    Game.init(isclient, serverip, screen, clock)
+def startgame(isclient, ip, name):
+    Game.init(isclient, ip, name, screen, clock)
 
 if __name__ == "__main__":
+    pygame.init()
     screen = pygame.display.set_mode((400, 400))
     clock = pygame.time.Clock()
-    init(screen, clock)
+    init()
