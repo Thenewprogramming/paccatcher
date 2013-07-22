@@ -1,13 +1,20 @@
 import pygame
-import time
-
-"""
-Herpaderp Derpi'n around.
-"""
+import Client
 
 
 def init(isclient, serverip, name, screen, clock):
+
     screen.fill((0, 0, 0))
     pygame.display.update()
-    time.sleep(1)
-    pass
+
+    if isclient:
+        try:
+            host, port = serverip.split(":")
+        except ValueError:
+            host = serverip
+            port = 1234
+        Client.connect(host, port)
+        Client.ready(name)
+        
+    else:
+        pass  # Hoe word de serverip variable ingedeeld als het een server is?
