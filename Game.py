@@ -17,4 +17,4 @@ def init(isclient, serverip, name, screen, clock):
         Client.ready(name)
         
     else:
-        pass  # Hoe word de serverip variable ingedeeld als het een server is?
+        pass
