@@ -1,5 +1,6 @@
 import pygame
 import Client
+from Server import server
 
 
 def init(isclient, serverip, name, screen, clock):
@@ -12,9 +13,21 @@ def init(isclient, serverip, name, screen, clock):
             host, port = serverip.split(":")
         except ValueError:
             host = serverip
-            port = 1234
-        Client.connect(host, port)
+            port = 12341
+        Client.connect(host)
         Client.ready(name)
-        
+
     else:
-        pass
+        try:
+            host, port = serverip.split(":")
+        except ValueError:
+            host = ""
+            port = 12341
+        Server = server()
+
+    while True:
+        if not isclient:
+            if Server.isdone():
+                break
+    for thing in Server.connected:
+        print(thing.name)

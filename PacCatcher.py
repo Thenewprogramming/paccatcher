@@ -96,6 +96,7 @@ def exitgame():
 
 
 def startgame(isclient, ip, name):
+    print("This is the ip: " + ip)
     Game.init(isclient, ip, name, screen, clock)
 
 if __name__ == "__main__":
